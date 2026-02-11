@@ -3,7 +3,7 @@
 Тестовое задание на позицию Junior Frontend Developer.
 Приложение для управления задачами с поддержкой темной темы, Drag & Drop и сохранением данных.
 
-**Demo:** [Link to Vercel/Netlify] (add your link here)
+**Demo:** test-task-rlsz10u9z-rendooqs-projects.vercel.app
 
 ## Стек технологий
 
