@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# To-Do App (Next.js 14)
 
-## Getting Started
+Тестовое задание на позицию Junior Frontend Developer.
+Приложение для управления задачами с поддержкой темной темы, Drag & Drop и сохранением данных.
 
-First, run the development server:
+**Demo:** [Link to Vercel/Netlify] (add your link here)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Стек технологий
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Framework:** Next.js 14 (App Router)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS + `lucide-react` (icons)
+* **State Management:** React Hooks (`useState`, `useEffect`)
+* **Drag & Drop:** `@hello-pangea/dnd`
+* **Theming:** `next-themes`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Функционал
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **CRUD:** Добавление, удаление, переключение статуса задач.
+* **Фильтрация:** Вкладки "Все", "Активные", "Выполненные".
+* **Drag & Drop:** Перетаскивание задач (работает только во вкладке "Все" для сохранения консистентности индексов).
+* **Dark Mode:** Поддержка системной темы и ручное переключение.
+* **Персистенция:** Автоматическое сохранение в `localStorage`.
 
-## Learn More
+## Запуск локально
 
-To learn more about Next.js, take a look at the following resources:
+1.  **Установка зависимостей:**
+    ```bash
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2.  **Запуск dev-сервера:**
+    ```bash
+    npm run dev
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3.  **Билд:**
+    ```bash
+    npm run build
+    ```
 
-## Deploy on Vercel
+## Технические решения и нюансы
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1.  **Hydration Mismatch:**
+    Так как Next.js использует SSR, а данные берутся из `localStorage` (браузер API), реализован хук для проверки `mounted` состояния. Это предотвращает ошибки гидратации при первой отрисовке.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2.  **Логика Drag & Drop:**
+    Сортировка доступна только при фильтре `All`. При фильтрации по статусу (Active/Completed) перетаскивание отключается программно, чтобы визуальный индекс элемента не конфликтовал с реальным индексом в массиве стейта.
+
+3.  **Архитектура:**
+    Компоненты вынесены в `src/components`. Используется композиция провайдеров (`ThemeProvider`) в `layout.tsx` для чистоты кода.
+
+## Что можно улучшить (Todo)
+
+* Добавить редактирование текста задачи (inline-edit).
+* Покрыть тестами (Vitest/React Testing Library).
+* Использовать `useReducer` или Zustand, если приложение будет расти.
